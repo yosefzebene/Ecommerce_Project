@@ -1,14 +1,33 @@
 ActiveAdmin.register Product do
 
-  permit_params :name, :price, :description, :image
+  permit_params :name, :price, :description, :image, products_categories_attributes: [:id, :product_id, :category_id, :_destroy]
+
+  index do
+    selectable_column
+    column :id
+    column :name
+    column :price
+    column :description
+    column :categories do |c|
+      c.categories do |category|
+        category.name
+      end
+    end
+    actions
+  end
 
   show do
     attributes_table do
       row :name
       row :price
       row :description
-      row :image do |ad|
-        image_tag ad.image.variant(:thumb)
+      row :categories do |c|
+        c.categories do |category|
+          category.name
+        end
+      end
+      row :image do |preview|
+        image_tag preview.image.variant(:thumb)
       end
     end
     active_admin_comments
@@ -19,6 +38,9 @@ ActiveAdmin.register Product do
     f.inputs
     f.inputs do
       f.input :image, as: :file
+    end
+    f.has_many :products_categories, allow_destroy: true do |n_f|
+      n_f.input :category
     end
     f.actions 
   end
