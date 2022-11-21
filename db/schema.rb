@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_20_222819) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_21_040820) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -102,6 +102,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_20_222819) do
     t.index ["country_id"], name: "index_regions_on_country_id"
   end
 
+  create_table "tax_rates", force: :cascade do |t|
+    t.integer "region_id", null: false
+    t.decimal "GST"
+    t.decimal "PST"
+    t.decimal "HST"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["region_id"], name: "index_tax_rates_on_region_id", unique: true
+  end
+
   add_foreign_key "cities", "regions"
   add_foreign_key "locations", "cities"
   add_foreign_key "locations", "customers"
@@ -111,4 +121,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_20_222819) do
   add_foreign_key "products_categories", "categories"
   add_foreign_key "products_categories", "products"
   add_foreign_key "regions", "countries"
+  add_foreign_key "tax_rates", "regions"
 end
