@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_24_183621) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_24_185702) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -120,7 +120,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_24_183621) do
     t.integer "order_id", null: false
     t.integer "product_id", null: false
     t.integer "quantity"
-    t.decimal "singleprice"
+    t.integer "singleprice"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_order_products_on_order_id"
@@ -129,10 +129,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_24_183621) do
 
   create_table "orders", force: :cascade do |t|
     t.integer "customer_id", null: false
-    t.decimal "PST"
-    t.decimal "GST"
-    t.decimal "HST"
-    t.decimal "subtotal"
+    t.integer "PST"
+    t.integer "GST"
+    t.integer "HST"
+    t.integer "subtotal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status_id", null: false
@@ -142,7 +142,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_24_183621) do
 
   create_table "products", force: :cascade do |t|
     t.string "name"
-    t.decimal "price"
+    t.integer "price"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
