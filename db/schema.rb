@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_24_014153) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_24_183621) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -129,14 +129,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_24_014153) do
 
   create_table "orders", force: :cascade do |t|
     t.integer "customer_id", null: false
-    t.string "status"
     t.decimal "PST"
     t.decimal "GST"
     t.decimal "HST"
     t.decimal "subtotal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status_id", null: false
     t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["status_id"], name: "index_orders_on_status_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -168,6 +169,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_24_014153) do
     t.index ["country_id"], name: "index_regions_on_country_id"
   end
 
+  create_table "statuses", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tax_rates", force: :cascade do |t|
     t.integer "region_id", null: false
     t.decimal "GST"
@@ -186,6 +194,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_24_014153) do
   add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
   add_foreign_key "orders", "customers"
+  add_foreign_key "orders", "statuses"
   add_foreign_key "products", "discounts"
   add_foreign_key "products_categories", "categories"
   add_foreign_key "products_categories", "products"
