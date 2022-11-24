@@ -1,6 +1,5 @@
 ActiveAdmin.register Product do
-
-  permit_params :name, :price, :description, :image, products_categories_attributes: [:id, :product_id, :category_id, :_destroy]
+  permit_params :name, :price, :description, :isactive, :discount_id, :image, products_categories_attributes: [:id, :product_id, :category_id, :_destroy]
 
   index do
     selectable_column
@@ -8,6 +7,8 @@ ActiveAdmin.register Product do
     column :name
     column :price
     column :description
+    column :isactive
+    column :discount
     column :categories do |c|
       c.categories do |category|
         category.name
@@ -21,6 +22,8 @@ ActiveAdmin.register Product do
       row :name
       row :price
       row :description
+      row :isactive
+      row :discount
       row :categories do |c|
         c.categories do |category|
           category.name
