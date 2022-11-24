@@ -26,7 +26,7 @@ Category.destroy_all
     category = Category.create(name: Faker::Commerce.unique.department(max: 1), description: Faker::Marketing.buzzwords)
 
     2.times do
-        product = Product.new(name: Faker::Commerce.unique.product_name, price: Faker::Commerce.price, description: Faker::Marketing.buzzwords)
+        product = Product.new(name: Faker::Commerce.unique.product_name, price: Faker::Commerce.price, description: Faker::Marketing.buzzwords, isactive: true)
         downloaded_image = URI.open("https://source.unsplash.com/600x600/?#{product.name}")
         product.image.attach(io: downloaded_image, filename: "m-#{product.name}.jpg")
         product.save

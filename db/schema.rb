@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_21_054032) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_24_014153) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -96,6 +96,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_054032) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "discounts", force: :cascade do |t|
+    t.string "name"
+    t.integer "percent"
+    t.datetime "valid_until"
+    t.text "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string "address"
     t.string "postalcode"
@@ -136,6 +145,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_054032) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "isactive"
+    t.integer "discount_id"
+    t.index ["discount_id"], name: "index_products_on_discount_id"
   end
 
   create_table "products_categories", force: :cascade do |t|
@@ -174,6 +186,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_054032) do
   add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
   add_foreign_key "orders", "customers"
+  add_foreign_key "products", "discounts"
   add_foreign_key "products_categories", "categories"
   add_foreign_key "products_categories", "products"
   add_foreign_key "regions", "countries"
