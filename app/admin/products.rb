@@ -1,12 +1,14 @@
 ActiveAdmin.register Product do
-  permit_params :name, :price, :description, :isactive, :discount_id, :image, products_categories_attributes: [:id, :product_id, :category_id, :_destroy]
+  permit_params :name, :price, :description, :isactive, :discount_id, :image, products_categories_attributes: [:id, :product_id, :category_id, :_destroy] #, pictures: []
   actions :index, :show, :new, :edit, :update
 
   index do
     selectable_column
     column :id
     column :name
-    column :price
+    column "Price" do |p|
+      p.price_in_dollar
+    end
     column :description
     column :isactive
     column :discount
@@ -21,7 +23,9 @@ ActiveAdmin.register Product do
   show do
     attributes_table do
       row :name
-      row :price
+      row "Price" do |p|
+        p.price_in_dollar
+      end
       row :description
       row :isactive
       row :discount
@@ -39,7 +43,14 @@ ActiveAdmin.register Product do
 
   form do |f|
     f.semantic_errors
-    f.inputs
+    f.inputs do
+      f.input :name
+      f.input :price
+      f.input :description
+      f.input :discount
+      f.input :isactive
+    end
+
     f.inputs do
       f.input :image, as: :file
     end
