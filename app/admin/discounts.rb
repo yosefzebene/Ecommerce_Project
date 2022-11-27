@@ -19,9 +19,8 @@ ActiveAdmin.register Discount do
       row :note
       row :valid_until
       row :created_at
-      row :products do |p|
-        p.products do |product|
-          product.name
+      row "Products" do |d|
+        d.products.each do
         end
       end
     end

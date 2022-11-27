@@ -12,6 +12,9 @@ ActiveAdmin.register Order do
     column "Subtotal" do |p|
       p.subtotal_in_dollar
     end
+    column "Total" do |p|
+      p.calculated_total
+    end
     column :status
     actions
   end
@@ -27,6 +30,9 @@ ActiveAdmin.register Order do
       row :HST
       row "Subtotal" do |p|
         p.subtotal_in_dollar
+      end
+      row "Total" do |p|
+        p.calculated_total
       end
       row :status
     end

@@ -34,8 +34,17 @@ ActiveAdmin.register Product do
           category.name
         end
       end
-      row :image do |preview|
-        image_tag preview.image.variant(:thumb)
+
+      # row :pictures do |p|
+      #   (0...p.pictures.count).each do |i|
+      #     columns image_tag p.pictures[i].variant(:thumb)
+      #   end
+      # end
+
+      row :image do |p|
+        if p.image.attached?
+          image_tag p.image.variant(:thumb)
+        end
       end
     end
     active_admin_comments
@@ -54,6 +63,11 @@ ActiveAdmin.register Product do
     f.inputs do
       f.input :image, as: :file
     end
+
+    # f.inputs do
+    #   f.input :pictures, as: :file, input_html: {multiple: true}
+    # end
+    
     f.has_many :products_categories, allow_destroy: true do |n_f|
       n_f.input :category
     end

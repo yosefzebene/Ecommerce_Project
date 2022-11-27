@@ -13,8 +13,12 @@ class Product < ApplicationRecord
     attachable.variant :display, resize_to_limit: [600, 600]
   end
 
+  # has_many_attached :pictures do |attachable|
+  #   attachable.variant :thumb, resize_to_limit: [200, 200]
+  # end
+
   validates :name, uniqueness: true, presence: true, length: { maximum: 100 }
-  validates :price, :description, :image, presence: true
+  validates :price, :description, presence: true
   validates :isactive, inclusion: { in: [ true, false ], message: "Please, select one!" }
   validates :name, uniqueness: true
   validates :price, numericality: true
