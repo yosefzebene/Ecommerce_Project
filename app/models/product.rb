@@ -9,7 +9,7 @@ class Product < ApplicationRecord
   accepts_nested_attributes_for :products_categories, allow_destroy: true
 
   has_one_attached :image do |attachable|
-    attachable.variant :thumb, resize_to_limit: [200, 200]
+    attachable.variant :thumb, resize_to_fill: [128, 128]
     attachable.variant :display, resize_to_limit: [600, 600]
   end
 

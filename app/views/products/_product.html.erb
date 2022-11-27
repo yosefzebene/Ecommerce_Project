@@ -1,0 +1,21 @@
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      <%= link_to product.name, product %>
+    </p>
+  </header>
+
+  <div class="card-image">
+    <figure class="image is-square">
+      <%= image_tag product.image.variant(:thumb) %>
+    </figure>
+  </div>
+
+  <div class="card-content">
+    <div class="media">
+      <div class="media-content">
+        <p class="subtitle is-6">$<%= product.price_in_dollar %></p>
+      </div>
+    </div>
+  </div>
+</div>
