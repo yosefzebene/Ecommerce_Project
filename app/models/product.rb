@@ -13,6 +13,8 @@ class Product < ApplicationRecord
     attachable.variant :display, resize_to_limit: [600, 600]
   end
 
+  paginates_per 10
+
   # has_many_attached :pictures do |attachable|
   #   attachable.variant :thumb, resize_to_limit: [200, 200]
   # end

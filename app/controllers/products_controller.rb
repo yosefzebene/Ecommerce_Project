@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.where(isactive: true)
+    @products = Product.where(isactive: true).page(params[:page])
   end
 
   def show
