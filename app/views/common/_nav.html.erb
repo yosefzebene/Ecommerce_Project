@@ -12,6 +12,11 @@
     </div>
 
     <div id="mainNavbar" class="navbar-menu">
+        <div class="navbar-start">
+          <%= link_to 'Home', root_path, :class => "navbar-item" %>
+          <%= link_to 'Categories', categories_path, :class => "navbar-item" %>
+        </div>
+
         <div class="navbar-item is-expanded">
           <input class="input is-primary is-medium is-rounded" type="text" placeholder="Search">
         </div>
