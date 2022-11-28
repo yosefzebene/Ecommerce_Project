@@ -1,2 +1,14 @@
-<h1>Categories#show</h1>
-<p>Find me in app/views/categories/show.html.erb</p>
+<div class="columns">
+    <div class="column has-text-centered">
+    <h1 class="title" style="color: black;">Products in <%= @category.name %></h1><br>
+    </div>
+</div>
+<div id="app" class="row columns is-multiline">
+    <% @products_in_category.each do |product| %>
+        <div class="column is-3">
+            <a href="<%= products_path %>/<%= product.id %>">
+                <%= render "common/product", product: product %>
+            </a>
+        </div>
+    <% end %>
+</div>

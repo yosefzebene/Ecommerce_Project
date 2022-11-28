@@ -6,7 +6,9 @@
 <div id="app" class="row columns is-multiline">
     <% @products.each do |product| %>
         <div class="column is-3">
-            <%= render "product", product: product %>
+            <a href="<%= products_path %>/<%= product.id %>">
+                <%= render "common/product", product: product %>
+            </a>
         </div>
     <% end %>
 </div>

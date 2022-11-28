@@ -4,6 +4,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @products = Product.where(isactive: true).find(params[:id])
+    @product = Product.where(isactive: true).find(params[:id])
   end
 end
