@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
   belongs_to :discount, optional: true
-  
+
   has_many :order_products
   has_many :orders, through: :order_products
 
@@ -19,11 +19,11 @@ class Product < ApplicationRecord
 
   validates :name, uniqueness: true, presence: true, length: { maximum: 100 }
   validates :price, :description, presence: true
-  validates :isactive, inclusion: { in: [ true, false ], message: "Please, select one!" }
+  validates :isactive, inclusion: { in: [true, false], message: "Please, select one!" }
   validates :name, uniqueness: true
   validates :price, numericality: true
 
   def price_in_dollar
-    '%.2f' % (self[:price].to_i/100.0)
+    format("%.2f", (self[:price].to_i / 100.0))
   end
 end
