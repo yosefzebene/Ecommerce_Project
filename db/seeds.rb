@@ -2,15 +2,13 @@
 Region.destroy_all
 Country.destroy_all
 
-1.times do
-  country = Country.create(name: Faker::Address.country)
+country = Country.create(name: Faker::Address.country)
 
-  5.times do
-    country.regions.create(name: Faker::Address.state, code: Faker::Address.state_abbr)
-  end
+5.times do
+  country.regions.create(name: Faker::Address.state, code: Faker::Address.state_abbr)
 end
 
-puts "1 Country, 5 Regions, and 10 cities created."
+Rails.logger.debug "1 Country, 5 Regions, and 10 cities created."
 
 # Seed products and categories
 ProductsCategory.destroy_all
@@ -23,7 +21,8 @@ Category.destroy_all
 
   2.times do
     product = Product.new(name: Faker::Commerce.unique.product_name,
-                          price: Faker::Commerce.price(range: 1000..10_000), description: Faker::Marketing.buzzwords, isactive: true)
+                          price: Faker::Commerce.price(range: 1000..10_000),
+                          description: Faker::Marketing.buzzwords, isactive: true)
     # downloaded_image = URI.open("https://source.unsplash.com/600x600/?#{product.name}")
     # product.image.attach(io: downloaded_image, filename: "m-#{product.name}.jpg")
     product.save
@@ -32,6 +31,9 @@ Category.destroy_all
   end
 end
 
-puts "5 categories and 10 products created."
+Rails.logger.debug "5 categories and 10 products created."
 
-# AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+# AdminUser.create!(
+#   email: 'admin@example.com',
+#   password: 'password',
+#   password_confirmation: 'password') if Rails.env.development?
