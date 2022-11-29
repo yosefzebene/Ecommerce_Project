@@ -1,6 +1,7 @@
 AllCops:
   NewCops: enable
   Exclude:
+    - vendor/bundle/**/*
     - db/migrate/**/*
     - db/schema.rb
     - config/**/*
