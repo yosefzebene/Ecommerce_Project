@@ -34,7 +34,7 @@ jobs:
         with:
           bundler-cache: true
       - name: Regenerate bin
-        uses: bundle exec rake app:update:bin
+        run: bundle exec rake app:update:bin
       # Add or replace database setup steps here
       - name: Set up database schema
         run: bin/rails db:schema:load
