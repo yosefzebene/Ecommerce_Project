@@ -52,7 +52,8 @@ jobs:
           bundler-cache: true
           
       - name: Lint Ruby files
-        run: bin/rubocop --parallel
+        run: bundle exec rubocop
+        # run: bin/rubocop --parallel
         
       - name: Run security checks
         run: |
