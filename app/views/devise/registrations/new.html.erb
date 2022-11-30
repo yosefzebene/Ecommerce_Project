@@ -2,10 +2,24 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="field">
+    <%= f.label :firstname %><br />
+    <%= f.text_field :firstname, autofocus: true, autocomplete: "first name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :lastname %><br />
+    <%= f.text_field :lastname, autocomplete: "last name" %>
+  </div>
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone %><br />
+    <%= f.phone_field :phone, autocomplete: "phone" %>
   </div>
 
   <div class="field">
@@ -20,6 +34,28 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
+
+  <%= f.fields_for :locations do |location_form| %>
+    <div class="field">
+      <%= location_form.label :address %><br />
+      <%= location_form.text_field :address, autocomplete: "address" %>
+    </div>
+
+    <div class="field">
+      <%= location_form.label :postalcode %><br />
+      <%= location_form.text_field :postalcode, autocomplete: "postal code" %>
+    </div>
+
+    <div class="field">
+      <%= location_form.label :city %><br />
+      <%= location_form.text_field :city, autocomplete: "home city" %>
+    </div>
+
+    <div class="field">
+      <%= location_form.label :region_id %><br />
+      <%= location_form.collection_select :region_id, Region.all, :id, :name, prompt: true %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= f.submit "Sign up" %>
