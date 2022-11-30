@@ -28,7 +28,11 @@
       <div class="navbar-item">
         <div class="buttons">
           <% if customer_signed_in? %>
-            <%= button_to "Sign out", destroy_customer_session_path, method: :delete, :class => "button is-light" %> 
+            <%= button_to "Sign out", destroy_customer_session_path, method: :delete, :class => "button is-light" %>
+            
+            <a class="button is-primary" href=<%= edit_customer_registration_path %>>
+              <strong>Profile</strong>
+            </a>
           <% else %>
             <a class="button is-primary" href=<%= new_customer_registration_path %>>
               <strong>Sign up</strong>

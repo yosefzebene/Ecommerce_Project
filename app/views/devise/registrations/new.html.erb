@@ -35,25 +35,25 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <%= f.fields_for :locations do |location_form| %>
+  <%= f.fields_for :locations do |ff| %>
     <div class="field">
-      <%= location_form.label :address %><br />
-      <%= location_form.text_field :address, autocomplete: "address" %>
+      <%= ff.label :address %><br />
+      <%= ff.text_field :address, autocomplete: "address" %>
     </div>
 
     <div class="field">
-      <%= location_form.label :postalcode %><br />
-      <%= location_form.text_field :postalcode, autocomplete: "postal code" %>
+      <%= ff.label :postalcode %><br />
+      <%= ff.text_field :postalcode, autocomplete: "postal code" %>
     </div>
 
     <div class="field">
-      <%= location_form.label :city %><br />
-      <%= location_form.text_field :city, autocomplete: "home city" %>
+      <%= ff.label :city %><br />
+      <%= ff.text_field :city, autocomplete: "home city" %>
     </div>
 
     <div class="field">
-      <%= location_form.label :region_id %><br />
-      <%= location_form.collection_select :region_id, Region.all, :id, :name, prompt: true %>
+      <%= ff.label :region_id %><br />
+      <%= ff.collection_select :region_id, Region.all, :id, :name, prompt: true %>
     </div>
   <% end %>
 

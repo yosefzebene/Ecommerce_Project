@@ -31,6 +31,28 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
+  <%= f.fields_for :locations do |ff| %>
+    <div class="field">
+      <%= ff.label :address %><br />
+      <%= ff.text_field :address, autocomplete: "address" %>
+    </div>
+
+    <div class="field">
+      <%= ff.label :postalcode %><br />
+      <%= ff.text_field :postalcode, autocomplete: "postal code" %>
+    </div>
+
+    <div class="field">
+      <%= ff.label :city %><br />
+      <%= ff.text_field :city, autocomplete: "home city" %>
+    </div>
+
+    <div class="field">
+      <%= ff.label :region_id %><br />
+      <%= ff.collection_select :region_id, Region.all, :id, :name, prompt: true %>
+    </div>
+  <% end %>
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>

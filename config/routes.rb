@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   resources :products
   resources :categories
 
-  devise_for :customers
+  devise_for :customers, controllers: {
+    sessions: 'customers/sessions',
+    registrations: 'customers/registrations'
+  }
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 end
