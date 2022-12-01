@@ -49,7 +49,7 @@ require "csv"
 #     )
 
 #     product.image.attach(
-#         io: File.open("#{Rails.root}/app/assets/images/products/#{csvproduct['image']}"),
+#         io: File.open("#{Rails.root}/db/product_images/#{csvproduct['image']}"),
 #         filename: "m-#{product.name}.jpg"
 #     )
 
