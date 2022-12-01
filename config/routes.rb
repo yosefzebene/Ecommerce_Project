@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
   root 'products#index'
-  get 'products/onsale'
-  get 'products/newproducts'
 
+  #Products
+  get 'onsale', to: 'products#onsale'
+  get 'newproducts', to: 'products#newproducts'
+  get 'search', to: 'products#search'
   resources :products 
+  
   resources :categories
 
   devise_for :customers, controllers: {
