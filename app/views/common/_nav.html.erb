@@ -17,31 +17,40 @@
           <%= link_to 'Categories', categories_path, :class => "navbar-item" %>
         </div>
 
-        <div class="navbar-item is-expanded">
-          <input class="input is-primary is-medium is-rounded" type="text" placeholder="Search">
-        </div>
+        <div class="navbar-end is-expanded">
+          <div class="navbar-item">
+            <div class="buttons">
+              <% if customer_signed_in? %>
+                <%= button_to "Sign out", destroy_customer_session_path, method: :delete, :class => "button is-danger" %>
+                
+                <a class="button is-primary" href=<%= edit_customer_registration_path %>>
+                  <strong>Profile</strong>
+                </a>
+              <% else %>
+                <a class="button is-primary" href=<%= new_customer_registration_path %>>
+                  <strong>Sign up</strong>
+                </a>
+                <a class="button is-light" href=<%= customer_session_path %>>
+                  Log in
+                </a>
+              <% end %>
+            </div>
+          </div>
 
-        
-    </div>
-
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <% if customer_signed_in? %>
-            <%= button_to "Sign out", destroy_customer_session_path, method: :delete, :class => "button is-light" %>
-            
-            <a class="button is-primary" href=<%= edit_customer_registration_path %>>
-              <strong>Profile</strong>
-            </a>
-          <% else %>
-            <a class="button is-primary" href=<%= new_customer_registration_path %>>
-              <strong>Sign up</strong>
-            </a>
-            <a class="button is-light" href=<%= customer_session_path %>>
-              Log in
-            </a>
-          <% end %>
+          <div class="navbar-item">
+            <input class="input is-primary is-medium is-rounded" type="text" placeholder="Search">
+          </div>
         </div>
-      </div>
     </div>
 </nav>
+
+<div class="tabs is-centered is-toggle is-toggle-rounded">
+  <ul>
+    <li>
+      <a class="button is-danger" href=<%= products_onsale_path %>><strong>On Sale</strong></a>
+    </li>
+    <li>
+      <a class="button is-light" href=<%= products_newproducts_path %>>New</a>
+    </li>
+  </ul>
+</div>

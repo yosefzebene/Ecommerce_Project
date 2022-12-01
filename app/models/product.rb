@@ -24,6 +24,10 @@ class Product < ApplicationRecord
   validates :isactive, inclusion: { in: [ true, false ], message: "Please, select one!" }
   validates :price, numericality: true
 
+  scope :activeproducts, -> { where(isactive: true) }
+  scope :onsale, -> { activeproducts.where.not(discount_id: nil) }
+  scope :newproducts, -> { activeproducts.where("DATE(created_at) > ?", Date.today - 3) }
+
   def price_in_dollar
     '%.2f' % (self[:price].to_i/100.0)
   end

@@ -46,6 +46,8 @@ ActiveAdmin.register Product do
           image_tag p.image.variant(:thumb)
         end
       end
+
+      row :created_at
     end
     active_admin_comments
   end

@@ -1,9 +1,17 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.where(isactive: true).page(params[:page])
+    @products = Product.activeproducts.page(params[:page])
   end
 
   def show
-    @product = Product.where(isactive: true).find(params[:id])
+    @product = Product.activeproducts.find(params[:id])
+  end
+
+  def onsale
+    @products = Product.onsale.page(params[:page])
+  end
+
+  def newproducts
+    @products = Product.newproducts.page(params[:page])
   end
 end

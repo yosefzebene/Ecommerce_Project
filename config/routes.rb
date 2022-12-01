@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root 'products#index'
+  get 'products/onsale'
+  get 'products/newproducts'
 
-  resources :products
+  resources :products 
   resources :categories
 
   devise_for :customers, controllers: {
