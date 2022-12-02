@@ -5,13 +5,9 @@ one:
   lastname: MyString
   email: MyString
   phone: MyString
-  password_digest: MyString
-  location: one
 
 two:
   firstname: MyString
   lastname: MyString
   email: MyString
   phone: MyString
-  password_digest: MyString
-  location: two

@@ -3,9 +3,9 @@
 one:
   address: MyString
   postalcode: MyString
-  city: one
+  region: one
 
 two:
   address: MyString
   postalcode: MyString
-  city: two
+  region: two
