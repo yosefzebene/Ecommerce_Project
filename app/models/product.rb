@@ -1,10 +1,10 @@
 class Product < ApplicationRecord
   belongs_to :discount, optional: true
-  
-  has_many :order_products
+
+  has_many :order_products, dependent: nil
   has_many :orders, through: :order_products
 
-  has_many :products_categories
+  has_many :products_categories, dependent: nil
   has_many :categories, through: :products_categories
   accepts_nested_attributes_for :products_categories, allow_destroy: true
 
@@ -17,13 +17,12 @@ class Product < ApplicationRecord
   #   attachable.variant :thumb, resize_to_limit: [200, 200]
   # end
 
-  validates :name, uniqueness: true, presence: true, length: { maximum: 100 }
+  validates :name, presence: true, length: { maximum: 100 }
   validates :price, :description, presence: true
-  validates :isactive, inclusion: { in: [ true, false ], message: "Please, select one!" }
-  validates :name, uniqueness: true
+  validates :isactive, inclusion: { in: [true, false] }
   validates :price, numericality: true
 
   def price_in_dollar
-    '%.2f' % (self[:price].to_i/100.0)
+    format("%.2f", (self[:price].to_i / 100.0))
   end
 end
