@@ -1,5 +1,5 @@
 class Country < ApplicationRecord
-    has_many :regions
+  has_many :regions, dependent: nil
 
-    validates :name, presence: true
+  validates :name, presence: true
 end

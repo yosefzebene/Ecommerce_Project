@@ -4,7 +4,7 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :orders
+  has_many :orders, dependent: nil
   has_many :locations, dependent: :destroy
   accepts_nested_attributes_for :locations, allow_destroy: true
 
