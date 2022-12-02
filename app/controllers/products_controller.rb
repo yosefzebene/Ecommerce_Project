@@ -22,11 +22,13 @@ class ProductsController < ApplicationController
       parameter = params[:search].downcase
 
       if params[:category].blank?
-        @products = Product.activeproducts.where("lower(name) LIKE ?", "%#{parameter}%").page(params[:page])
+        @products = Product.activeproducts.where("lower(name) LIKE ?",
+                                                 "%#{parameter}%").page(params[:page])
       else
         category = Category.find(params[:category])
 
-        @products = category.products.activeproducts.where("lower(name) LIKE ?", "%#{parameter}%").page(params[:page])
+        @products = category.products.activeproducts.where("lower(name) LIKE ?",
+                                                           "%#{parameter}%").page(params[:page])
       end
     end
   end

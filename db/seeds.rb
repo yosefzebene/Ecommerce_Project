@@ -1,6 +1,6 @@
 require "csv"
 
-#Seed country, region, and city
+# Seed country, region, and city
 # Region.destroy_all
 # Country.destroy_all
 
@@ -12,7 +12,7 @@ require "csv"
 
 # Rails.logger.debug "1 Country, 5 Regions, and 10 cities created."
 
-#Seed products and categories
+# Seed products and categories
 # ProductsCategory.destroy_all
 # Product.destroy_all
 # Category.destroy_all
