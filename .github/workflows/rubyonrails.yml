@@ -35,7 +35,6 @@ jobs:
           bundler-cache: true
       - name: Install pg
         run: bundle add pg
-        run: bundle install
       - name: Regenerate bin
         run: bundle exec rake app:update:bin
       # Add or replace database setup steps here
