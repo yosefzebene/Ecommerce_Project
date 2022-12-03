@@ -31,4 +31,15 @@ class Product < ApplicationRecord
   def price_in_dollar
     format("%.2f", (self[:price].to_i / 100.0))
   end
+
+  def discount?
+    self[:discount_id].present?
+  end
+
+  def discount_price
+    discount_percentage = discount.percent
+    discount_amount = self[:price] * (discount_percentage.to_d / 100)
+
+    format("%.2f", ((self[:price] - discount_amount) / 100.0))
+  end
 end

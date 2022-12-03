@@ -13,6 +13,19 @@
                 <h2 class="subtitle is-4">
                     <%= @product.description %>
                 </h2>
+                
+                <% if @product.discount? %>
+                    <h3 class="subtitle is-4 has-text-danger">
+                        <s>$<%= @product.price_in_dollar %></s>
+                    </h3>
+                    <h3 class="subtitle is-4 has-text-danger">
+                        <Strong>$<%= @product.discount_price %></Strong>
+                    </h3>
+                <% else %>
+                    <h3 class="subtitle is-4">
+                        <%= @product.price_in_dollar %>
+                    </h3>
+                <% end %>
                 <br>
                 <p class="has-text-centered">
                     <a class="button is-medium is-info is-outlined">
