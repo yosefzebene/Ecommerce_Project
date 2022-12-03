@@ -1,0 +1,28 @@
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      <%= product.name %>
+    </p>
+  </header>
+
+  <div class="card-image">
+    <figure class="image is-square">
+      <% if product.image.attached? %>
+        <%= image_tag product.image.variant(:thumb) %>
+      <% end %>
+    </figure>
+  </div>
+
+  <div class="card-content">
+    <div class="media">
+      <div class="media-content">
+        <% if product.discount? %>
+          <p class="subtitle is-6 has-text-danger"><s>$<%= product.price_in_dollar %></s></p>
+          <p class="subtitle is-6"><Strong>$<%= product.discount_price %></Strong></p>
+        <% else %>
+          <p class="subtitle is-6">$<%= product.price_in_dollar %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

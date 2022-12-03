@@ -5,7 +5,7 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :orders, dependent: nil
-  has_many :locations, dependent: nil
+  has_many :locations, dependent: :destroy
   accepts_nested_attributes_for :locations, allow_destroy: true
 
   validates :firstname, :lastname, :phone, presence: true

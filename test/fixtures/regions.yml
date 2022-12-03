@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+region_one:
   name: MyString
   code: MyString
-  country: one
+  country: country_one
 
-two:
+region_two:
   name: MyString
   code: MyString
-  country: two
+  country: country_two

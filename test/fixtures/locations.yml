@@ -3,9 +3,11 @@
 one:
   address: MyString
   postalcode: MyString
-  city: one
+  customer: bob
+  region: region_one
 
 two:
   address: MyString
   postalcode: MyString
-  city: two
+  customer: will
+  region: region_two

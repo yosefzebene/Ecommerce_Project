@@ -1,9 +1,18 @@
 Rails.application.routes.draw do
-  devise_for :customers
+  root 'products#index'
+
+  #Products
+  get 'onsale', to: 'products#onsale'
+  get 'newproducts', to: 'products#newproducts'
+  get 'search', to: 'products#search'
+  resources :products 
+  
+  resources :categories
+
+  devise_for :customers, controllers: {
+    sessions: 'customers/sessions',
+    registrations: 'customers/registrations'
+  }
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end
