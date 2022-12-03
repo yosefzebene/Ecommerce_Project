@@ -1,11 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+product_one:
   name: MyString
   price: 9.99
   description: MyText
+  isactive: true
 
-two:
+product_two:
   name: MyString
   price: 9.99
   description: MyText
+  isactive: true

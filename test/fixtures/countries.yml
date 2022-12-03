@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+country_one:
   name: MyString
 
-two:
+country_two:
   name: MyString

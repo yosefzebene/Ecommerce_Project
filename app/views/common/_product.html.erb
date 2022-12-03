@@ -7,7 +7,9 @@
 
   <div class="card-image">
     <figure class="image is-square">
-      <%= image_tag product.image.variant(:thumb) %>
+      <% if product.image.attached? %>
+        <%= image_tag product.image.variant(:thumb) %>
+      <% end %>
     </figure>
   </div>
 

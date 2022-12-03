@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  region: one
+  region: region_one
   GST: 9.99
   PST: 9.99
   HST: 9.99
 
 two:
-  region: two
+  region: region_two
   GST: 9.99
   PST: 9.99
   HST: 9.99
