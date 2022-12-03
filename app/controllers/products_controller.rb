@@ -16,20 +16,25 @@ class ProductsController < ApplicationController
   end
 
   def search
-    if params[:search].blank?
-      redirect_to products_path and return
-    else
-      parameter = params[:search].downcase
+    redirect_to products_path and return if params[:search].blank?
 
-      if params[:category].blank?
-        @products = Product.activeproducts.where("lower(name) LIKE ?",
-                                                 "%#{parameter}%").page(params[:page])
-      else
-        category = Category.find(params[:category])
+    @products = params[:category].blank? ? search_products : search_products_in_category
+  end
 
-        @products = category.products.activeproducts.where("lower(name) LIKE ?",
-                                                           "%#{parameter}%").page(params[:page])
-      end
-    end
+  private
+
+  def search_products_in_category
+    parameter = params[:search].downcase
+    category = Category.find(params[:category])
+
+    category.products.activeproducts.where("lower(name) LIKE ?",
+                                           "%#{parameter}%").page(params[:page])
+  end
+
+  def search_products
+    parameter = params[:search].downcase
+
+    Product.activeproducts.where("lower(name) LIKE ?",
+                                 "%#{parameter}%").page(params[:page])
   end
 end

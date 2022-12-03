@@ -26,7 +26,7 @@ class Product < ApplicationRecord
 
   scope :activeproducts, -> { where(isactive: true) }
   scope :onsale, -> { activeproducts.where.not(discount_id: nil) }
-  scope :newproducts, -> { activeproducts.where("DATE(created_at) > ?", Date.today - 3) }
+  scope :newproducts, -> { activeproducts.where("DATE(created_at) > ?", Time.zone.today - 3) }
 
   def price_in_dollar
     format("%.2f", (self[:price].to_i / 100.0))
