@@ -1,9 +1,11 @@
 <h1 class="title">Cart</h1>
 
 <% if @cart.empty? %>
-    <h1 class="title">Cart is empty</h1>
+    <br>
+    <h1 class="subtitle">Cart is empty</h1>
+    <%= link_to "Back to Shopping", root_path %>
 <% else %>
-    <% @cart.each do |product| %>
+    <% @cart.each do |product, quantity| %>
         <div class="box has-background-light">
             <article class="media">
                 <div class="media-left">
@@ -16,7 +18,7 @@
                 <div class="media-content">
                     <div class="content">
                         <h3 class="title is-4"><%= link_to product.name, product_path(product.id), target: '_blank' %></h3> 
-                        
+
                         <br>
                         <strong>Price: </strong>
                         <% if product.discount? %>
@@ -28,11 +30,37 @@
                     </div>
                     <nav class="level is-mobile">
                         <div class="level-left">
-                        <%= link_to 'Remove', remove_from_cart_path(product.id), data: {turbo_method: :delete} %>
+                            <%= link_to 'Remove', remove_from_cart_path(product.id), data: {turbo_method: :delete} %>
+                        </div>
+                        <div class="level-left">
+                            <%= form_with(url: add_to_cart_path(product.id), data: {turbo_method: :post}) do |f| %>
+                                <div class="field has-addons">
+                                    <div class="control">
+                                        <%= f.number_field :quantity, in: 1..20, step: 1, value: quantity, :class => "input is-primary" %>
+                                    </div>
+                                    <div class="control">
+                                        <%= f.submit "Update", :class => "button is-primary" %>
+                                    </div>
+                                </div>
+                            <% end %>
                         </div>
                     </nav>
                 </div>
             </article>
         </div>
     <% end %>
+
+    <div class="box has-background-light">
+        <article class="media">
+            <div class="media-content">
+                <div class="content">
+                    <strong>Subtotal: <%= number_to_currency Product.calculate_subtotal(@cart) %></strong>
+
+                    <p>
+                        <%= link_to 'Checkout', '#', :class => "button is-medium is-primary is-outlined" %>
+                    </p>
+                </div>
+            </div>
+        </article>
+    </div>
 <% end %>

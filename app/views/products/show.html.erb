@@ -27,13 +27,21 @@
                     </h3>
                 <% end %>
                 <br>
-                <p class="has-text-centered">
-                    <% if @cart.include?(@product.id.to_i) %>
-                        <%= link_to 'Remove From Cart', remove_from_cart_path(@product.id), data: {turbo_method: :delete}, :class => "button is-medium is-danger is-outlined" %>
-                    <% else %>
-                        <%= link_to 'Add to Cart', add_to_cart_path(@product.id), data: {turbo_method: :post}, :class => "button is-medium is-info is-outlined" %>
+
+                <% if @cart.has_key?(@product.id.to_s) %>
+                    <%= link_to 'Remove From Cart', remove_from_cart_path(@product.id), data: {turbo_method: :delete}, :class => "button is-medium is-danger is-outlined" %>
+                <% else %>
+                    <%= form_with(url: add_to_cart_path, data: {turbo_method: :post}) do |form| %>
+                        <div class="field has-addons has-addons-centered">
+                            <div class="control">
+                                <%= form.number_field :quantity, in: 1..20, step: 1, value: 1, :class => "input is-medium is-primary" %>
+                            </div>
+                            <div class="control">
+                                <%= form.submit 'Add to Cart', :class => "button is-medium is-primary is-outlined" %>
+                            </div>
+                        </div>
                     <% end %>
-                </p>
+                <% end %>
             </div>
         </div>
     </div>

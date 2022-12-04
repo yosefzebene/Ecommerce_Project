@@ -38,8 +38,22 @@ class Product < ApplicationRecord
 
   def discount_price
     discount_percentage = discount.percent
-    discount_amount = self[:price] * (discount_percentage.to_d / 100)
+    discount_amount = self[:price] * (discount_percentage / 100.0)
 
     (self[:price] - discount_amount) / 100.0
+  end
+
+  def self.calculate_subtotal(products)
+    total = 0
+
+    products.each do |product, quantity|
+      total = if product.discount?
+                total + (product.discount_price * quantity)
+              else
+                total + (product.price_in_dollar * quantity)
+              end
+    end
+
+    total
   end
 end
