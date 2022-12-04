@@ -2,7 +2,7 @@
     <div class="container has-text-centered">
         <div class="columns is-vcentered">
             <div class="column is-5">
-                <figure class="image is-3by4">
+                <figure class="image is-square">
                     <%= image_tag @product.image.variant(:display)%>
                 </figure>
             </div>
@@ -16,21 +16,23 @@
                 
                 <% if @product.discount? %>
                     <h3 class="subtitle is-4 has-text-danger">
-                        <s>$<%= @product.price_in_dollar %></s>
+                        <s><%= number_to_currency @product.price_in_dollar %></s>
                     </h3>
                     <h3 class="subtitle is-4 has-text-danger">
-                        <Strong>$<%= @product.discount_price %></Strong>
+                        <Strong><%= number_to_currency @product.discount_price %></Strong>
                     </h3>
                 <% else %>
                     <h3 class="subtitle is-4">
-                        <%= @product.price_in_dollar %>
+                        <%= number_to_currency @product.price_in_dollar %>
                     </h3>
                 <% end %>
                 <br>
                 <p class="has-text-centered">
-                    <a class="button is-medium is-info is-outlined">
-                        Add to Cart
-                    </a>
+                    <% if @cart.include?(@product.id.to_i) %>
+                        <%= link_to 'Remove From Cart', remove_from_cart_path(@product.id), data: {turbo_method: :delete}, :class => "button is-medium is-danger is-outlined" %>
+                    <% else %>
+                        <%= link_to 'Add to Cart', add_to_cart_path(@product.id), data: {turbo_method: :post}, :class => "button is-medium is-info is-outlined" %>
+                    <% end %>
                 </p>
             </div>
         </div>
