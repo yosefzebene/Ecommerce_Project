@@ -42,7 +42,9 @@ class ProductsController < ApplicationController
       @cart[product] = quantity
     end
 
-    @cart
+    return unless customer_signed_in?
+
+    @locations = Location.where(customer_id: current_customer.id)
   end
 
   private

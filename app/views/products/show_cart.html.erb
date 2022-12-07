@@ -54,11 +54,26 @@
         <article class="media">
             <div class="media-content">
                 <div class="content">
-                    <strong>Subtotal: <%= number_to_currency Product.calculate_subtotal(@cart) %></strong>
-
-                    <p>
-                        <%= link_to 'Checkout', '#', :class => "button is-medium is-primary is-outlined" %>
-                    </p>
+                    <strong>Subtotal: </strong><%= number_to_currency Product.calculate_subtotal(@cart) %>
+                    
+                    <% if customer_signed_in? %>
+                        <p>Select location: </p>
+                        <%= form_with(url: checkout_path, data: {turbo: false}) do |f| %>
+                            <% @locations.each do |location| %>
+                                <div class="control">
+                                    <%= f.radio_button :location, location.id, id: location.id %>
+                                    <%= f.label location.id, location.formatted_location %>
+                                </div>
+                            <% end %>
+                            <div class="control">
+                                <%= f.submit "Checkout", :class => "button is-medium is-primary is-outlined" %>
+                            </div>
+                        <% end %>
+                    <% else %>
+                        <div class="notification is-danger">
+                            Please <%= link_to 'login', customer_session_path %> or <%= link_to 'signup', new_customer_registration_path %> to checkout
+                        </div>
+                    <% end %>
                 </div>
             </div>
         </article>

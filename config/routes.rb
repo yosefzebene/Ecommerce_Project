@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   delete 'products/remove_from_cart/:id', to: 'products#remove_from_cart', as: 'remove_from_cart'
   get 'shopping_cart', to: 'products#show_cart', as: 'show_cart'
 
+  post 'checkout', to: 'checkout#stripe_checkout', as: 'checkout'
+  get 'checkoutsuccess', to: 'checkout#buildorder', as: 'checkout_success'
+
   devise_for :customers, controllers: {
     sessions: 'customers/sessions',
     registrations: 'customers/registrations'
