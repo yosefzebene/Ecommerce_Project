@@ -2,7 +2,9 @@ class CheckoutController < ApplicationController
   def confirmorder
     order = Order.find(session[:order_id])
     status = Status.find_by(name: "Paid")
-    order.update(status_id: status.id)
+    stripe = Stripe::Checkout::Session.retrieve(params[:session_id])
+
+    order.update(status_id: status.id, stripe_payment_id: stripe.payment_intent)
   
     session[:cart] = {}
 

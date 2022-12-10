@@ -4,6 +4,6 @@ class CustomerController < ApplicationController
   def list_orders
     customer = Customer.find(current_customer.id)
 
-    @orders = customer.orders.all
+    @orders = customer.orders.all.order(created_at: :desc)
   end
 end
