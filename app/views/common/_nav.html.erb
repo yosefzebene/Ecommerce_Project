@@ -30,7 +30,7 @@
               <% if customer_signed_in? %>
                 <%= button_to "Sign out", destroy_customer_session_path, method: :delete, :class => "button is-danger" %>
                 
-                <a class="button is-primary" href=<%= edit_customer_registration_path %>>
+                <a class="button is-primary" href=<%= profile_path %>>
                   <strong>Profile</strong>
                 </a>
               <% else %>

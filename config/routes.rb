@@ -15,7 +15,14 @@ Rails.application.routes.draw do
   get 'shopping_cart', to: 'products#show_cart', as: 'show_cart'
 
   post 'checkout', to: 'checkout#stripe_checkout', as: 'checkout'
-  get 'checkoutsuccess', to: 'checkout#buildorder', as: 'checkout_success'
+  get 'checkoutsuccess', to: 'checkout#confirmorder', as: 'checkout_success'
+  get 'checkoutcanceled', to: 'checkout#cancelorder', as: 'checkout_cancel'
+
+  # Customer
+  get 'profile', to: 'customer#profile_options', as: 'profile'
+  get 'orders', to: 'customer#list_orders', as: 'list_orders'
+
+  resources :orders
 
   devise_for :customers, controllers: {
     sessions: 'customers/sessions',
