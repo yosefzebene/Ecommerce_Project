@@ -46,9 +46,7 @@ ActiveAdmin.register Order do
       f.input :PST
       f.input :GST
       f.input :HST
-      if f.object.new_record?
-        f.input :status
-      end
+      f.input :status
     end
 
     f.has_many :order_products, allow_destroy: true do |n_f|

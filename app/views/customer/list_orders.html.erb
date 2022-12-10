@@ -10,11 +10,14 @@
             <article class="media">
                 <div class="media-content">
                     <div class="content">
-                        <strong>Subtotal: </strong><%= order.subtotal_in_dollar %>
+                        <h3 class="title is-6">Order Placed:</h3> 
+                        <p class="subtitle is-6"><%= order.created_at.strftime("%B %d, %Y")  %></p> 
+
+                        <strong>Subtotal: </strong><%= number_to_currency  order.subtotal_in_dollar %>
                         <br>
-                        <strong>Tax: </strong><%= order.total_tax %>
+                        <strong>Tax: </strong><%= number_to_currency  order.total_tax %>
                         <br>
-                        <strong>Total: </strong><%= order.calculated_total %>
+                        <strong>Total: </strong><%= number_to_currency  order.calculated_total %>
                     </div>
                     <nav class="level is-mobile">
                         <div class="level-left">

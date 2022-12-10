@@ -1,6 +1,9 @@
 class CheckoutController < ApplicationController
-
   def confirmorder
+    order = Order.find(session[:order_id])
+    status = Status.find_by(name: "Paid")
+    order.update(status_id: status.id)
+  
     session[:cart] = {}
 
     redirect_to root_path
@@ -54,7 +57,7 @@ class CheckoutController < ApplicationController
           product_data:        {
             name: product.name
           },
-          unit_amount_decimal: (product.discount? ? product.discount_price : product.price_in_dollar) * 100
+          unit_amount_decimal: (product.discount? ? product.discount_price : product.price_in_dollar).round(2) * 100
         },
         quantity:   quantity
       }
@@ -114,10 +117,12 @@ class CheckoutController < ApplicationController
     gst = (subtotal * (tax_rate.GST / 100)).round(2) * 100
     hst = (subtotal * (tax_rate.HST / 100)).round(2) * 100
 
-    order = customer.orders.create(status_id: status.id, PST: pst, GST: gst, HST: hst, subtotal: subtotal * 100)
+    order = customer.orders.create(status_id: status.id, PST: pst, GST: gst, HST: hst,
+                                   subtotal: subtotal * 100)
 
     cart.each do |product, quantity|
-      order.order_products.create(product_id: product.id, quantity: quantity, singleprice: product.price)
+      order.order_products.create(product_id: product.id, quantity: quantity,
+                                  singleprice: (product.discount? ? product.discount_price : product.price_in_dollar).round(2) * 100)
     end
 
     session[:order_id] = order.id
