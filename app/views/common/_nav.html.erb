@@ -15,15 +15,22 @@
         <div class="navbar-start">
           <%= link_to 'Home', root_path, :class => "navbar-item" %>
           <%= link_to 'Categories', categories_path, :class => "navbar-item" %>
+          <%= link_to 'New', newproducts_path, :class => "navbar-item" %>
+          <%= link_to 'On Sale', onsale_path, :class => "navbar-item", :style => "color: red;" %>
         </div>
 
         <div class="navbar-end is-expanded">
           <div class="navbar-item">
             <div class="buttons">
+              <a class="button" href=<%= show_cart_path %>>
+                <span class="icon">
+                  <i class="fa fa-shopping-cart"></i>
+                </span>
+              </a>
               <% if customer_signed_in? %>
                 <%= button_to "Sign out", destroy_customer_session_path, method: :delete, :class => "button is-danger" %>
                 
-                <a class="button is-primary" href=<%= edit_customer_registration_path %>>
+                <a class="button is-primary" href=<%= profile_path %>>
                   <strong>Profile</strong>
                 </a>
               <% else %>
@@ -61,14 +68,3 @@
           </div>
     </div>
 </nav>
-
-<div class="tabs is-centered is-toggle is-toggle-rounded">
-  <ul>
-    <li>
-      <a class="button is-danger" href=<%= onsale_path %>><strong>On Sale</strong></a>
-    </li>
-    <li>
-      <a class="button is-light" href=<%= newproducts_path %>>New</a>
-    </li>
-  </ul>
-</div>

@@ -1,0 +1,14 @@
+country,province,code,gst,pst,hst
+Canada,Alberta,AB,5,0,0
+Canada,British Columbia,BC,5,7,0
+Canada,Manitoba,MB,5,7,0
+Canada,New Brunswick,NB,0,0,15
+Canada,Newfoundland and Labrador,NL,0,0,15
+Canada,Northwest Territories,NT,5,0,0
+Canada,Nova Scotia,NS,0,0,15
+Canada,Nunavut,NU,5,0,0
+Canada,Ontario,ON,0,0,13
+Canada,Prince Edward Island,PE,0,0,15
+Canada,Quebec,QC,5,9.975,0
+Canada,Saskatchewan,SK,5,6,0
+Canada,Yukon,YT,5,0,0

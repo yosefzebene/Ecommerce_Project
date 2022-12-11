@@ -2,7 +2,7 @@
     <div class="container has-text-centered">
         <div class="columns is-vcentered">
             <div class="column is-5">
-                <figure class="image is-3by4">
+                <figure class="image is-square">
                     <%= image_tag @product.image.variant(:display)%>
                 </figure>
             </div>
@@ -16,22 +16,32 @@
                 
                 <% if @product.discount? %>
                     <h3 class="subtitle is-4 has-text-danger">
-                        <s>$<%= @product.price_in_dollar %></s>
+                        <s><%= number_to_currency @product.price_in_dollar %></s>
                     </h3>
                     <h3 class="subtitle is-4 has-text-danger">
-                        <Strong>$<%= @product.discount_price %></Strong>
+                        <Strong><%= number_to_currency @product.discount_price %></Strong>
                     </h3>
                 <% else %>
                     <h3 class="subtitle is-4">
-                        <%= @product.price_in_dollar %>
+                        <%= number_to_currency @product.price_in_dollar %>
                     </h3>
                 <% end %>
                 <br>
-                <p class="has-text-centered">
-                    <a class="button is-medium is-info is-outlined">
-                        Add to Cart
-                    </a>
-                </p>
+
+                <% if @cart.has_key?(@product.id.to_s) %>
+                    <%= link_to 'Remove From Cart', remove_from_cart_path(@product.id), data: {turbo_method: :delete}, :class => "button is-medium is-danger is-outlined" %>
+                <% else %>
+                    <%= form_with(url: add_to_cart_path, data: {turbo_method: :post}) do |form| %>
+                        <div class="field has-addons has-addons-centered">
+                            <div class="control">
+                                <%= form.number_field :quantity, in: 1..20, step: 1, value: 1, :class => "input is-medium is-primary" %>
+                            </div>
+                            <div class="control">
+                                <%= form.submit 'Add to Cart', :class => "button is-medium is-primary is-outlined" %>
+                            </div>
+                        </div>
+                    <% end %>
+                <% end %>
             </div>
         </div>
     </div>

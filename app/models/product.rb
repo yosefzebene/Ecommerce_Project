@@ -29,7 +29,7 @@ class Product < ApplicationRecord
   scope :newproducts, -> { activeproducts.where("DATE(created_at) > ?", Time.zone.today - 3) }
 
   def price_in_dollar
-    format("%.2f", (self[:price].to_i / 100.0))
+    self[:price] / 100.0
   end
 
   def discount?
@@ -38,8 +38,22 @@ class Product < ApplicationRecord
 
   def discount_price
     discount_percentage = discount.percent
-    discount_amount = self[:price] * (discount_percentage.to_d / 100)
+    discount_amount = self[:price] * (discount_percentage / 100.0)
 
-    format("%.2f", ((self[:price] - discount_amount) / 100.0))
+    (self[:price] - discount_amount) / 100.0
+  end
+
+  def self.calculate_subtotal(products)
+    total = 0
+
+    products.each do |product, quantity|
+      total = if product.discount?
+                total + (product.discount_price * quantity)
+              else
+                total + (product.price_in_dollar * quantity)
+              end
+    end
+
+    total
   end
 end

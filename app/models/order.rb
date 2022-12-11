@@ -9,13 +9,6 @@ class Order < ApplicationRecord
   validates :subtotal, presence: true
   validates :PST, :GST, :HST, :subtotal, numericality: true
 
-  before_save :set_subtotal
-  def subtotal
-    order_products.collect do |order_product|
-      order_product.valid? ? order_product.singleprice * order_product.quantity : 0
-    end.sum
-  end
-
   def total_tax
     format("%.2f", ((self[:PST] + self[:GST] + self[:HST]).to_i / 100.0))
   end
@@ -26,11 +19,5 @@ class Order < ApplicationRecord
 
   def calculated_total
     format("%.2f", ((self[:subtotal] + self[:PST] + self[:GST] + self[:HST]).to_i / 100.0))
-  end
-
-  private
-
-  def set_subtotal
-    self[:subtotal] = subtotal
   end
 end
