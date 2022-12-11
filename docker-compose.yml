@@ -1,20 +1,26 @@
 version: '3.8'
+volumes:
+  postgres-data:
 services:
   db:
     image: postgres
     environment:
-      POSTGRES_USER: agageetagrs
-      POSTGRES_PASSWORD: dadadadafefafragrth45hgh54hh
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432"
     volumes:
-      - postgres:/var/lib/postgresql/data
-  web:
-    build: .
+      - postgres-data:/var/lib/postgresql/data
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    volumes:
-      - .:/Rails-Docker
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db:5432
+      - RAILS_SERVE_STATIC_FILES=true
+    # volumes:
+    #   - .:/Rails-Docker
     ports:
       - "3000:3000"
     depends_on:
       - db
-volumes:
-  postgres:
