@@ -1,0 +1,58 @@
+<div class="box has-background-light">
+    <article class="media">
+        <div class="media-content">
+            <div class="content">
+                <h3 class="title is-4">Order Details</h3> 
+
+                <br>
+                <strong>Subtotal: </strong><%= number_to_currency  @order.subtotal_in_dollar %>
+                <br>
+                <strong>Tax: </strong><%= number_to_currency  @order.total_tax %>
+                <br>
+                <strong>Total: </strong><%= number_to_currency  @order.calculated_total %>
+                <br>
+                <span class="tag is-dark">
+                    <%= @order.status.name %>
+                </span>
+            </div>
+        </div>
+        <div class="media-right">
+            <div class="content">
+                <h3 class="subtitle is-6">Shipping Address</h3> 
+
+                <br>
+                <%= @order.customer.firstname %> <%= @order.customer.lastname %>
+                <br>
+                <%= @location.address %>
+                <br>
+                <%= @location.city %>, <%= @location.region.name %> <%= @location.postalcode %>
+                <br>
+                <%= @location.region.country.name %>
+            </div>
+        </div>
+    </article>
+</div>
+
+<% @order_products.each do |productdetail| %>
+    <div class="box has-background-light">
+        <article class="media">
+            <div class="media-left">
+                <figure class="image is-128x128">
+                    <% if productdetail.product.image.attached? %>
+                        <%= image_tag productdetail.product.image.variant(:thumb) %>
+                    <% end %>
+                </figure>
+            </div>
+            <div class="media-content">
+                <div class="content">
+                    <h3 class="title is-4"><%= link_to productdetail.product.name, product_path(productdetail.product.id), target: '_blank' %></h3> 
+
+                    <br>
+                    <strong>Price: </strong><%= number_to_currency productdetail.price_in_dollar %>
+                    <br>
+                    <strong>Quantity: </strong><%= productdetail.quantity %>
+                </div>
+            </div>
+        </article>
+    </div>
+<% end %>

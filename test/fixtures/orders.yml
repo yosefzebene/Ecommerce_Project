@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+order_one:
+  customer: bob
+  status: status_one
+  PST: 9.99
+  GST: 9.99
+  HST: 9.99
+  subtotal: 9.99
+
+order_two:
+  customer: will
+  status: status_two
+  PST: 9.99
+  GST: 9.99
+  HST: 9.99
+  subtotal: 9.99

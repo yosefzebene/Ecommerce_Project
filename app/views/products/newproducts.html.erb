@@ -1,0 +1,15 @@
+<div class="columns">
+    <div class="column has-text-centered">
+    <h1 class="title" style="color: black;">New Products</h1><br>
+    </div>
+</div>
+<div id="app" class="row columns is-multiline">
+    <% @products.each do |product| %>
+        <div class="column is-3">
+            <a href="<%= products_path %>/<%= product.id %>">
+                <%= render "common/product", product: product %>
+            </a>
+        </div>
+    <% end %>
+</div>
+<%= paginate @products %>

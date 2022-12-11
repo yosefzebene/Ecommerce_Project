@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+bob:
+  firstname: Bob
+  lastname: Son
+  email: bobson@example.com
+  phone: MyString
+
+will:
+  firstname: Will
+  lastname: Ferd
+  email: willferd@example.com
+  phone: MyString
