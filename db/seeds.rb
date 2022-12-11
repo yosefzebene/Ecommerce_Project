@@ -19,8 +19,6 @@ provinces.each do |province|
                  HST: province["hst"])
 end
 
-Rails.logger.debug "Provinces and tax rates imported from CSV"
-
 # Seed products and categories
 ProductsCategory.destroy_all
 Product.destroy_all
@@ -57,8 +55,6 @@ products.each do |csvproduct|
     ProductsCategory.create!(product_id: product.id, category_id: category.id)
   end
 end
-
-Rails.logger.debug "Products CSV imported"
 
 # Seed Status
 Status.destroy_all
