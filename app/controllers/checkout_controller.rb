@@ -5,7 +5,7 @@ class CheckoutController < ApplicationController
     stripe = Stripe::Checkout::Session.retrieve(params[:session_id])
 
     order.update(status_id: status.id, stripe_payment_id: stripe.payment_intent)
-  
+
     session[:cart] = {}
 
     redirect_to root_path
@@ -16,15 +16,15 @@ class CheckoutController < ApplicationController
     redirect_to show_cart_path
   end
 
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Layout/LineLength
+  # rubocop:disable Metrics/AbcSize
   def stripe_checkout
-    # do tax stuff with the location
     customer = Customer.find(current_customer.id)
-
     cart = fetch_cart
-
-    items = build_products_price_data(cart)
     create_order(customer, cart)
 
+    items = build_products_price_data(cart)
     session = Stripe::Checkout::Session.create({
                                                  customer_email: customer.email,
                                                  line_items:     items,
@@ -129,4 +129,7 @@ class CheckoutController < ApplicationController
 
     session[:order_id] = order.id
   end
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Layout/LineLength
+  # rubocop:enable Metrics/AbcSize
 end

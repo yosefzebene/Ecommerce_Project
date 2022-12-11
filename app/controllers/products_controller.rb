@@ -7,7 +7,8 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.activeproducts.find(params[:id])
+    @product = Product.find(params[:id])
+    redirect_to root_path unless @product.isactive?
   end
 
   def onsale
