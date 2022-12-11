@@ -8,10 +8,8 @@ ActiveAdmin.register Customer do
       row :email
       row :phone
       row :created_at
-      row "Locations" do |p|
-        p.locations.each do |location|
-          h3 location.address + ", " + location.city + ", " + location.region.name  + ", " + location.region.country.name + " | " + location.postalcode
-        end
+      row "Location" do
+        customer.locations.first.formatted_location
       end
     end
     active_admin_comments

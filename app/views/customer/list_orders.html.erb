@@ -1,0 +1,36 @@
+<h1 class="title">Your Orders</h1>
+
+<% if @orders.empty? %>
+    <br>
+    <h1 class="subtitle">You have no orders</h1>
+    <%= link_to "Back to Shopping", root_path %>
+<% else %>
+    <% @orders.each do |order| %>
+        <div class="box has-background-light">
+            <article class="media">
+                <div class="media-content">
+                    <div class="content">
+                        <h3 class="title is-6">Order Placed:</h3> 
+                        <p class="subtitle is-6"><%= order.created_at.strftime("%B %d, %Y")  %></p> 
+
+                        <strong>Subtotal: </strong><%= number_to_currency  order.subtotal_in_dollar %>
+                        <br>
+                        <strong>Tax: </strong><%= number_to_currency  order.total_tax %>
+                        <br>
+                        <strong>Total: </strong><%= number_to_currency  order.calculated_total %>
+                    </div>
+                    <nav class="level is-mobile">
+                        <div class="level-left">
+                            <%= link_to 'Order Details', order %>
+                        </div>
+                        <div class="level-left">
+                            <span class="tag is-dark">
+                                <%= order.status.name %>
+                            </span>
+                        </div>
+                    </nav>
+                </div>
+            </article>
+        </div>
+    <% end %>
+<% end %> 

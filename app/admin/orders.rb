@@ -5,7 +5,6 @@ ActiveAdmin.register Order do
     selectable_column
     column :id
     column :customer
-    # This needs to be in the model
     column "Tax" do |p|
       p.total_tax
     end
@@ -22,17 +21,17 @@ ActiveAdmin.register Order do
   show do
     attributes_table do
       row :customer
-      row "Products" do |p|
-        p.products
+      row "Products" do
+        order.products
       end
       row :PST
       row :GST
       row :HST
-      row "Subtotal" do |p|
-        p.subtotal_in_dollar
+      row "Subtotal" do
+        order.subtotal_in_dollar
       end
-      row "Total" do |p|
-        p.calculated_total
+      row "Total" do
+        order.calculated_total
       end
       row :status
     end
@@ -46,9 +45,7 @@ ActiveAdmin.register Order do
       f.input :PST
       f.input :GST
       f.input :HST
-      if f.object.new_record?
-        f.input :status
-      end
+      f.input :status
     end
 
     f.has_many :order_products, allow_destroy: true do |n_f|
